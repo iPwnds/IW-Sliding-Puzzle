@@ -1,7 +1,7 @@
 //Interne voorstelling van de puzzel als een tweedimensionale lijst
 let my_puzzle = [[0, 1, 2],
-              [7, 4, 8],
-              [3, 5, 6]];
+                 [7, 4, 8],
+                 [3, 5, 6]];
 
 //Wanneer de volledige HTML-pagina geladen is wordt onderstaande functie uitgevoerd
 window.onload = function(){
@@ -15,23 +15,21 @@ function draw_puzzle(puzzle){
     document.getElementById("puzzle_container").innerHTML = puzzle_html;
 }
 
-function generate_puzzle_html(my_puzzle){
-    //TODO: Implementeer deze functie!
-    //puzzle bevat een tweedimensionale lijst die de sliding puzzle voorstelt
-    //Kijk naar de functie generate_board_html in voorbeeld 7 uit het hoorcollege voor inspiratie
-    let table = "";
-    for(let r = 0; r < my_puzzle.length; r++){  
-        let column = "";
-        column += "<tr>"
-        let row = "";
-        for(let c = 0; c < my_puzzle[r].length; c++){
-            row += "<td>"
-            row += my_puzzle[r][c];
-            row += "</td>";
+function generate_puzzle_html(puzzle){
+    let puzzle_inner_html = "";
+    for(let i = 0; i < puzzle.length; i++){
+        
+        let row_html = "<tr>"
+        for(let j = 0; j < puzzle[i].length; j++){
+            if(puzzle[i][j] == 0){
+                row_html += "<td class=\"emptyTile\"></td>";
+            }else{
+                row_html += "<td>"+puzzle[i][j]+"</td>";
+            }
         }
-        column += row;
-        column += "</tr>";
-        table += column;
+        row_html += "</tr>";
+        puzzle_inner_html += row_html;
     }
-    return `<table>${table}</table>`;
+
+    return `<table>${puzzle_inner_html}</table>`;
 }
